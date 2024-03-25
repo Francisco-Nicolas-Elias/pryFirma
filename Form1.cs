@@ -25,9 +25,12 @@ namespace pryFirma
             papel.DrawRectangle(lápiz, 120, 75, 100, 100);
         }
 
-        //Creo una variable booleana para que cuando el usuario este dibujando sobre el PictureBox darle valor true
+        //Creo una variable booleana para darle valor true cuando el usuario este dibujando sobre el PictureBox 
         private bool dibujando = false;
 
+
+        //La variable de tipo Point es una estructura que representa un par de coordenadas x e y 
+        
         //Creo una variable de tipo point para almacenar la posición anterior del cursor del mouse mientras el usuario 
         //dibuja
         private Point posicionAnterior;
@@ -47,7 +50,7 @@ namespace pryFirma
         private void pbFirma_MouseMove(object sender, MouseEventArgs e)
         {
             //Si está dibujando el usuario ingresa al if 
-            if (dibujando)
+            if (dibujando == true)
             {
                 //Con el objeto Graphics del PictureBox dibuja una línea entre la posición anterior y la actual del cursor
                 using (Graphics g = pbFirma.CreateGraphics())
@@ -67,7 +70,7 @@ namespace pryFirma
         }
 
         private void btnGuardarFirma_Click(object sender, EventArgs e)
-        {
+        {           
             //Verifico que la Propiedad Image del PictureBox no sea nula, en ese caso ingreso al if
             if (pbFirma.Image != null)
             {
@@ -78,7 +81,7 @@ namespace pryFirma
             else
             {
                 MessageBox.Show("No hay firma para guardar.");
-            }
+            }   
         }
     }
 }
