@@ -39,6 +39,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox1.Location = new Point(86, 44);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(292, 196);
@@ -100,7 +101,7 @@
             Controls.Add(pictureBox1);
             Name = "frmFirma";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Formulario Firma ";
             Load += frmFirma_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbFirma).EndInit();
