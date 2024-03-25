@@ -28,49 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnMostrarRectangulo = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
+            pictureBox1 = new PictureBox();
+            btnMostrarRectangulo = new Button();
+            pbFirma = new PictureBox();
+            btnGuardarFirma = new Button();
+            lblFirma = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFirma).BeginInit();
+            SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(86, 44);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(292, 196);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.Location = new Point(86, 44);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(292, 196);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // btnMostrarRectangulo
             // 
-            this.btnMostrarRectangulo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMostrarRectangulo.Location = new System.Drawing.Point(293, 287);
-            this.btnMostrarRectangulo.Name = "btnMostrarRectangulo";
-            this.btnMostrarRectangulo.Size = new System.Drawing.Size(85, 37);
-            this.btnMostrarRectangulo.TabIndex = 1;
-            this.btnMostrarRectangulo.Text = "Mostrar";
-            this.btnMostrarRectangulo.UseVisualStyleBackColor = true;
-            this.btnMostrarRectangulo.Click += new System.EventHandler(this.btnMostrarRectangulo_Click);
+            btnMostrarRectangulo.Cursor = Cursors.Hand;
+            btnMostrarRectangulo.Location = new Point(293, 287);
+            btnMostrarRectangulo.Name = "btnMostrarRectangulo";
+            btnMostrarRectangulo.Size = new Size(85, 37);
+            btnMostrarRectangulo.TabIndex = 1;
+            btnMostrarRectangulo.Text = "Mostrar";
+            btnMostrarRectangulo.UseVisualStyleBackColor = true;
+            btnMostrarRectangulo.Click += btnMostrarRectangulo_Click;
+            // 
+            // pbFirma
+            // 
+            pbFirma.BorderStyle = BorderStyle.FixedSingle;
+            pbFirma.Location = new Point(624, 44);
+            pbFirma.Name = "pbFirma";
+            pbFirma.Size = new Size(332, 196);
+            pbFirma.TabIndex = 2;
+            pbFirma.TabStop = false;
+            pbFirma.MouseDown += pbFirma_MouseDown;
+            pbFirma.MouseMove += pbFirma_MouseMove;
+            pbFirma.MouseUp += pbFirma_MouseUp;
+            // 
+            // btnGuardarFirma
+            // 
+            btnGuardarFirma.Cursor = Cursors.Hand;
+            btnGuardarFirma.Location = new Point(862, 277);
+            btnGuardarFirma.Name = "btnGuardarFirma";
+            btnGuardarFirma.Size = new Size(85, 36);
+            btnGuardarFirma.TabIndex = 3;
+            btnGuardarFirma.Text = "Guardar";
+            btnGuardarFirma.UseVisualStyleBackColor = true;
+            btnGuardarFirma.Click += btnGuardarFirma_Click;
+            // 
+            // lblFirma
+            // 
+            lblFirma.AutoSize = true;
+            lblFirma.Location = new Point(624, 9);
+            lblFirma.Name = "lblFirma";
+            lblFirma.Size = new Size(66, 15);
+            lblFirma.TabIndex = 4;
+            lblFirma.Text = "Firme aquí:";
             // 
             // frmFirma
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 409);
-            this.Controls.Add(this.btnMostrarRectangulo);
-            this.Controls.Add(this.pictureBox1);
-            this.Name = "frmFirma";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.frmFirma_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1131, 409);
+            Controls.Add(lblFirma);
+            Controls.Add(btnGuardarFirma);
+            Controls.Add(pbFirma);
+            Controls.Add(btnMostrarRectangulo);
+            Controls.Add(pictureBox1);
+            Name = "frmFirma";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Form1";
+            Load += frmFirma_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFirma).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private PictureBox pictureBox1;
         private Button btnMostrarRectangulo;
+        private PictureBox pbFirma;
+        private Button btnGuardarFirma;
+        private Label lblFirma;
     }
 }
