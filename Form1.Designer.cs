@@ -94,6 +94,7 @@
             // 
             // btnLimpiar
             // 
+            btnLimpiar.Cursor = Cursors.Hand;
             btnLimpiar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnLimpiar.Location = new Point(871, 277);
             btnLimpiar.Name = "btnLimpiar";

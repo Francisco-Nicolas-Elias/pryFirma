@@ -86,7 +86,7 @@ namespace pryFirma
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            
+            pbFirma.Invalidate();
         }
     }
 }
