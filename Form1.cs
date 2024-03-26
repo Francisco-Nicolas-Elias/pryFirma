@@ -30,7 +30,7 @@ namespace pryFirma
 
 
         //La variable de tipo Point es una estructura que representa un par de coordenadas x e y 
-        
+
         //Creo una variable de tipo point para almacenar la posición anterior del cursor del mouse mientras el usuario 
         //dibuja
         private Point posicionAnterior;
@@ -53,12 +53,12 @@ namespace pryFirma
             if (dibujando == true)
             {
                 //Con el objeto Graphics del PictureBox dibuja una línea entre la posición anterior y la actual del cursor
-                using (Graphics g = pbFirma.CreateGraphics())
+                using (Graphics lapiz = pbFirma.CreateGraphics())               
                 {
                     //Dibuja una línea desde la posición anterior a la posición actual
-                    g.DrawLine(Pens.Black, posicionAnterior, e.Location);
+                    lapiz.DrawLine(Pens.Black, posicionAnterior, e.Location);
                     //Actualiza la posición anterior para el próximo movimiento
-                    posicionAnterior = e.Location;
+                    posicionAnterior = e.Location;              
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace pryFirma
         }
 
         private void btnGuardarFirma_Click(object sender, EventArgs e)
-        {           
+        {          
             //Verifico que la Propiedad Image del PictureBox no sea nula, en ese caso ingreso al if
             if (pbFirma.Image != null)
             {
@@ -81,7 +81,12 @@ namespace pryFirma
             else
             {
                 MessageBox.Show("No hay firma para guardar.");
-            }   
+            }                    
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

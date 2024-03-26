@@ -33,6 +33,7 @@
             pbFirma = new PictureBox();
             btnGuardarFirma = new Button();
             lblFirma = new Label();
+            btnLimpiar = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFirma).BeginInit();
             SuspendLayout();
@@ -49,6 +50,7 @@
             // btnMostrarRectangulo
             // 
             btnMostrarRectangulo.Cursor = Cursors.Hand;
+            btnMostrarRectangulo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnMostrarRectangulo.Location = new Point(293, 287);
             btnMostrarRectangulo.Name = "btnMostrarRectangulo";
             btnMostrarRectangulo.Size = new Size(85, 37);
@@ -72,7 +74,8 @@
             // btnGuardarFirma
             // 
             btnGuardarFirma.Cursor = Cursors.Hand;
-            btnGuardarFirma.Location = new Point(862, 277);
+            btnGuardarFirma.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnGuardarFirma.Location = new Point(780, 277);
             btnGuardarFirma.Name = "btnGuardarFirma";
             btnGuardarFirma.Size = new Size(85, 36);
             btnGuardarFirma.TabIndex = 3;
@@ -89,11 +92,23 @@
             lblFirma.TabIndex = 4;
             lblFirma.Text = "Firme aquí:";
             // 
+            // btnLimpiar
+            // 
+            btnLimpiar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnLimpiar.Location = new Point(871, 277);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(85, 36);
+            btnLimpiar.TabIndex = 5;
+            btnLimpiar.Text = "Limpiar";
+            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
             // frmFirma
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1131, 409);
+            Controls.Add(btnLimpiar);
             Controls.Add(lblFirma);
             Controls.Add(btnGuardarFirma);
             Controls.Add(pbFirma);
@@ -116,5 +131,6 @@
         private PictureBox pbFirma;
         private Button btnGuardarFirma;
         private Label lblFirma;
+        private Button btnLimpiar;
     }
 }
