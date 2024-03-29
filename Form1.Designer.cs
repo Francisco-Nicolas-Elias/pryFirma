@@ -34,6 +34,8 @@
             btnGuardarFirma = new Button();
             lblFirma = new Label();
             btnLimpiar = new Button();
+            lblNombreFirma = new Label();
+            txtNombreFirma = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFirma).BeginInit();
             SuspendLayout();
@@ -74,6 +76,7 @@
             // btnGuardarFirma
             // 
             btnGuardarFirma.Cursor = Cursors.Hand;
+            btnGuardarFirma.Enabled = false;
             btnGuardarFirma.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnGuardarFirma.Location = new Point(780, 277);
             btnGuardarFirma.Name = "btnGuardarFirma";
@@ -104,11 +107,31 @@
             btnLimpiar.UseVisualStyleBackColor = true;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
+            // lblNombreFirma
+            // 
+            lblNombreFirma.AutoSize = true;
+            lblNombreFirma.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNombreFirma.Location = new Point(991, 44);
+            lblNombreFirma.Name = "lblNombreFirma";
+            lblNombreFirma.Size = new Size(114, 15);
+            lblNombreFirma.TabIndex = 6;
+            lblNombreFirma.Text = "Ingrese su nombre:";
+            // 
+            // txtNombreFirma
+            // 
+            txtNombreFirma.Location = new Point(991, 77);
+            txtNombreFirma.Name = "txtNombreFirma";
+            txtNombreFirma.Size = new Size(177, 23);
+            txtNombreFirma.TabIndex = 7;
+            txtNombreFirma.TextChanged += txtNombreFirma_TextChanged;
+            // 
             // frmFirma
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1131, 409);
+            ClientSize = new Size(1220, 409);
+            Controls.Add(txtNombreFirma);
+            Controls.Add(lblNombreFirma);
             Controls.Add(btnLimpiar);
             Controls.Add(lblFirma);
             Controls.Add(btnGuardarFirma);
@@ -129,9 +152,11 @@
 
         private PictureBox pictureBox1;
         private Button btnMostrarRectangulo;
-        private PictureBox pbFirma;
         private Button btnGuardarFirma;
         private Label lblFirma;
         private Button btnLimpiar;
+        private PictureBox pbFirma;
+        private Label lblNombreFirma;
+        private TextBox txtNombreFirma;
     }
 }

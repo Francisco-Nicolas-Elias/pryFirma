@@ -53,12 +53,12 @@ namespace pryFirma
             if (dibujando == true)
             {
                 //Con el objeto Graphics del PictureBox dibuja una línea entre la posición anterior y la actual del cursor
-                using (Graphics lapiz = pbFirma.CreateGraphics())               
+                using (Graphics lapiz = pbFirma.CreateGraphics())
                 {
                     //Dibuja una línea desde la posición anterior a la posición actual
                     lapiz.DrawLine(Pens.Black, posicionAnterior, e.Location);
                     //Actualiza la posición anterior para el próximo movimiento
-                    posicionAnterior = e.Location;              
+                    posicionAnterior = e.Location;
                 }
             }
         }
@@ -69,8 +69,10 @@ namespace pryFirma
             dibujando = false;
         }
 
+        public int numeroImagenes = 0;
+
         private void btnGuardarFirma_Click(object sender, EventArgs e)
-        {          
+        {
             //Verifico que la Propiedad Image del PictureBox no sea nula, en ese caso ingreso al if
             if (pbFirma.Image != null)
             {
@@ -81,12 +83,26 @@ namespace pryFirma
             else
             {
                 MessageBox.Show("No hay firma para guardar.");
-            }                    
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             pbFirma.Invalidate();
+
+            txtNombreFirma.Clear();
+        }
+
+        private void txtNombreFirma_TextChanged(object sender, EventArgs e)
+        {
+            if(txtNombreFirma.Text != "")
+            {
+                btnGuardarFirma.Enabled = true;
+            }
+            else
+            {
+                btnGuardarFirma.Enabled = false;
+            }
         }
     }
 }
