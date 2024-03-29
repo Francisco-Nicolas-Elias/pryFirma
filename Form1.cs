@@ -1,3 +1,8 @@
+using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+
 namespace pryFirma
 {
     public partial class frmFirma : Form
@@ -5,6 +10,11 @@ namespace pryFirma
         public frmFirma()
         {
             InitializeComponent();
+
+            // Crear un nuevo bitmap del mismo tamaño que el PictureBox
+            firmaBitmap = new Bitmap(pbFirma.Width, pbFirma.Height);
+            // Asignar el bitmap al PictureBox
+            pbFirma.Image = firmaBitmap;
         }
 
         private void frmFirma_Load(object sender, EventArgs e)
@@ -28,6 +38,7 @@ namespace pryFirma
         //Creo una variable booleana para darle valor true cuando el usuario este dibujando sobre el PictureBox 
         private bool dibujando = false;
 
+        private Bitmap firmaBitmap;
 
         //La variable de tipo Point es una estructura que representa un par de coordenadas x e y 
 
@@ -53,12 +64,15 @@ namespace pryFirma
             if (dibujando == true)
             {
                 //Con el objeto Graphics del PictureBox dibuja una línea entre la posición anterior y la actual del cursor
-                using (Graphics lapiz = pbFirma.CreateGraphics())
+                using (Graphics lapiz = Graphics.FromImage(firmaBitmap))
                 {
                     //Dibuja una línea desde la posición anterior a la posición actual
                     lapiz.DrawLine(Pens.Black, posicionAnterior, e.Location);
                     //Actualiza la posición anterior para el próximo movimiento
                     posicionAnterior = e.Location;
+
+                    // Invalidar el área del PictureBox para forzar el redibujado
+                    pbFirma.Invalidate();
                 }
             }
         }
@@ -69,16 +83,29 @@ namespace pryFirma
             dibujando = false;
         }
 
-        public int numeroImagenes = 0;
-
         private void btnGuardarFirma_Click(object sender, EventArgs e)
         {
-            //Verifico que la Propiedad Image del PictureBox no sea nula, en ese caso ingreso al if
-            if (pbFirma.Image != null)
+            if (firmaBitmap != null)
             {
-                //Guarda la firma en una imagen PNG, lo hago con el método Save del objeto Image
-                pbFirma.Image.Save("firma.png", System.Drawing.Imaging.ImageFormat.Png);
-                MessageBox.Show("Firma guardada correctamente.");
+                try
+                {
+                    // Obtener la ruta de la carpeta "Imagenes Firmas" en la solución
+                    string carpetaFirmas = Path.Combine(Application.StartupPath, "Imagenes Firmas");
+                    // Crear la carpeta si no existe
+                    if (!Directory.Exists(carpetaFirmas))
+                    {
+                        Directory.CreateDirectory(carpetaFirmas);
+                    }
+                    // Guardar la firma en la carpeta "Firmas" con un nombre único
+                    string nombreArchivo = $"firma_{DateTime.Now.ToString("yyyyMMddHHmmss")}.png";
+                    string rutaArchivo = Path.Combine(carpetaFirmas, nombreArchivo);
+                    firmaBitmap.Save(rutaArchivo, System.Drawing.Imaging.ImageFormat.Png);
+                    MessageBox.Show("Firma guardada correctamente en la carpeta Imagenes Firmas.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al guardar la firma: " + ex.Message);
+                }
             }
             else
             {
@@ -104,5 +131,32 @@ namespace pryFirma
                 btnGuardarFirma.Enabled = false;
             }
         }
+
+        /*
+        private void GuardarImagen(string rutaArchivo)
+        {
+            try
+            {
+                // Crear un Bitmap del mismo tamaño que el PictureBox
+                Bitmap bmp = new Bitmap(pbFirma.Width, pbFirma.Height);
+
+                // Crear un objeto Graphics a partir del Bitmap
+                using (Graphics lapiz = Graphics.FromImage(bmp))
+                {
+                    // Copiar el contenido del PictureBox al Bitmap- pasa como parametros las coordenadas del pct y las coordenadas donde se van a pegar en el bitmap
+                    //el ultimo paarms toma el tamaño del pct que se va a copiar
+                    lapiz.CopyFromScreen(pbFirma.PointToScreen(Point.Empty), Point.Empty, pbFirma.Size);
+                }
+
+                // Guardar el Bitmap como una imagen en disco
+                bmp.Save(rutaArchivo, System.Drawing.Imaging.ImageFormat.Jpeg);
+                MessageBox.Show("Imagen creada con exito");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar la imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        */
     }
 }
