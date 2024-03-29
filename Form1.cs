@@ -7,13 +7,17 @@ namespace pryFirma
 {
     public partial class frmFirma : Form
     {
+        //Declaro una variable tipo Bitmap
+        private Bitmap firmaBitmap;
+
         public frmFirma()
         {
             InitializeComponent();
 
-            // Crear un nuevo bitmap del mismo tamaño que el PictureBox
+            //Creo un nuevo bitmap del mismo tamaño que el PictureBox
             firmaBitmap = new Bitmap(pbFirma.Width, pbFirma.Height);
-            // Asignar el bitmap al PictureBox
+
+            //Asigno el bitmap al PictureBox
             pbFirma.Image = firmaBitmap;
         }
 
@@ -37,8 +41,6 @@ namespace pryFirma
 
         //Creo una variable booleana para darle valor true cuando el usuario este dibujando sobre el PictureBox 
         private bool dibujando = false;
-
-        private Bitmap firmaBitmap;
 
         //La variable de tipo Point es una estructura que representa un par de coordenadas x e y 
 
@@ -66,12 +68,13 @@ namespace pryFirma
                 //Con el objeto Graphics del PictureBox dibuja una línea entre la posición anterior y la actual del cursor
                 using (Graphics lapiz = Graphics.FromImage(firmaBitmap))
                 {
-                    //Dibuja una línea desde la posición anterior a la posición actual
+                    //Dibujo una línea desde la posición anterior a la posición actual
                     lapiz.DrawLine(Pens.Black, posicionAnterior, e.Location);
-                    //Actualiza la posición anterior para el próximo movimiento
+
+                    //Actualizo la posición anterior para el próximo movimiento
                     posicionAnterior = e.Location;
 
-                    // Invalidar el área del PictureBox para forzar el redibujado
+                    //Invalido el área del PictureBox para forzar el redibujado
                     pbFirma.Invalidate();
                 }
             }
@@ -89,17 +92,24 @@ namespace pryFirma
             {
                 try
                 {
-                    // Obtener la ruta de la carpeta "Imagenes Firmas" en la solución
-                    string carpetaFirmas = Path.Combine(Application.StartupPath, "Imagenes Firmas");
-                    // Crear la carpeta si no existe
-                    if (!Directory.Exists(carpetaFirmas))
+                    //Obtengo la ruta de la carpeta "Imagenes Firmas" en la solución (Se crea en Bin - Debug - net6.0-windows)
+                    string carpetaImagenesFirmas = Path.Combine(Application.StartupPath, "Imagenes Firmas");
+
+                    //Creo la carpeta si no existe
+                    if (!Directory.Exists(carpetaImagenesFirmas))
                     {
-                        Directory.CreateDirectory(carpetaFirmas);
+                        Directory.CreateDirectory(carpetaImagenesFirmas);
                     }
-                    // Guardar la firma en la carpeta "Firmas" con un nombre único
-                    string nombreArchivo = $"firma_{DateTime.Now.ToString("yyyyMMddHHmmss")}.png";
-                    string rutaArchivo = Path.Combine(carpetaFirmas, nombreArchivo);
+
+                    //Guardo la firma en la carpeta "Imagenes Firmas" con un nombre único
+                    string nombreArchivo = txtNombreFirma.Text + $"_firma_{DateTime.Now.ToString("yyyyMMddHHmmss")}.png";
+
+                    //Combino las rutas para almacenarlas en una sola y utilizarla para guardar la imagen
+                    string rutaArchivo = Path.Combine(carpetaImagenesFirmas, nombreArchivo);
+
+                    //Con el método Save guardo la imagen en un archivo en el disco y le indico que va a ser formato Png
                     firmaBitmap.Save(rutaArchivo, System.Drawing.Imaging.ImageFormat.Png);
+
                     MessageBox.Show("Firma guardada correctamente en la carpeta Imagenes Firmas.");
                 }
                 catch (Exception ex)
@@ -111,17 +121,22 @@ namespace pryFirma
             {
                 MessageBox.Show("No hay firma para guardar.");
             }
+
+            LimpiarPictureBox();
+
+            txtNombreFirma.Clear();
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            pbFirma.Invalidate();
+            LimpiarPictureBox();
 
             txtNombreFirma.Clear();
         }
 
         private void txtNombreFirma_TextChanged(object sender, EventArgs e)
         {
+            //Activo y desactivos el botón Guardar dependiendo del contenido el txt
             if(txtNombreFirma.Text != "")
             {
                 btnGuardarFirma.Enabled = true;
@@ -132,31 +147,16 @@ namespace pryFirma
             }
         }
 
-        /*
-        private void GuardarImagen(string rutaArchivo)
+        private void LimpiarPictureBox()
         {
-            try
+            using (Graphics lapiz = Graphics.FromImage(pbFirma.Image))
             {
-                // Crear un Bitmap del mismo tamaño que el PictureBox
-                Bitmap bmp = new Bitmap(pbFirma.Width, pbFirma.Height);
-
-                // Crear un objeto Graphics a partir del Bitmap
-                using (Graphics lapiz = Graphics.FromImage(bmp))
-                {
-                    // Copiar el contenido del PictureBox al Bitmap- pasa como parametros las coordenadas del pct y las coordenadas donde se van a pegar en el bitmap
-                    //el ultimo paarms toma el tamaño del pct que se va a copiar
-                    lapiz.CopyFromScreen(pbFirma.PointToScreen(Point.Empty), Point.Empty, pbFirma.Size);
-                }
-
-                // Guardar el Bitmap como una imagen en disco
-                bmp.Save(rutaArchivo, System.Drawing.Imaging.ImageFormat.Jpeg);
-                MessageBox.Show("Imagen creada con exito");
+                //Dibujo un rectángulo blanco del tamaño del PictureBox para limpiar la imagen
+                lapiz.FillRectangle(Brushes.White, 0, 0, pbFirma.Width, pbFirma.Height);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al guardar la imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            //Fuerzo el redibujado del PictureBox para reflejar los cambios
+            pbFirma.Invalidate();
         }
-        */
     }
 }
